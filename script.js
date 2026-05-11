@@ -6,29 +6,29 @@
 /* ===== DATA MENU ===== */
 const menus = [
   // Hot Coffee
-  { name: 'Espresso Gayo',        cat: 'hot',       price: 'Rp 28.000', tag: 'Best Seller', desc: 'Arabika Gayo, karakter fruity & bright, body medium.' },
-  { name: 'Americano',            cat: 'hot',       price: 'Rp 25.000', tag: '',            desc: 'Espresso diencerkan air panas, bersih dan ringan.' },
-  { name: 'Flat White',           cat: 'hot',       price: 'Rp 32.000', tag: 'New',         desc: 'Espresso ristretto dengan microfoam susu segar, creamy.' },
-  { name: 'Kopi Susu Spesial',    cat: 'hot',       price: 'Rp 32.000', tag: '',            desc: 'Perpaduan espresso, susu segar, dan gula aren lokal.' },
-  { name: 'Pour Over Toraja',     cat: 'hot',       price: 'Rp 38.000', tag: 'New',         desc: 'Manual brew biji Toraja, earthy, chocolatey, low acid.' },
+  { name: 'Espresso Gayo',        cat: 'hot',       price: 'Rp 28.000', tag: 'Best Seller', desc: 'Arabika Gayo, karakter fruity & bright, body medium.',          img: 'https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=120&h=120&fit=crop' },
+  { name: 'Americano',            cat: 'hot',       price: 'Rp 25.000', tag: '',            desc: 'Espresso diencerkan air panas, bersih dan ringan.',             img: 'https://images.unsplash.com/photo-1551030173-122aabc4489c?w=120&h=120&fit=crop' },
+  { name: 'Flat White',           cat: 'hot',       price: 'Rp 32.000', tag: 'New',         desc: 'Espresso ristretto dengan microfoam susu segar, creamy.',       img: 'https://images.unsplash.com/photo-1577968897966-3d4325b36b61?w=120&h=120&fit=crop' },
+  { name: 'Kopi Susu Spesial',    cat: 'hot',       price: 'Rp 32.000', tag: '',            desc: 'Perpaduan espresso, susu segar, dan gula aren lokal.',          img: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=120&h=120&fit=crop' },
+  { name: 'Pour Over Toraja',     cat: 'hot',       price: 'Rp 38.000', tag: 'New',         desc: 'Manual brew biji Toraja, earthy, chocolatey, low acid.',        img: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=120&h=120&fit=crop' },
 
   // Cold Brew
-  { name: 'Cold Brew Flores',     cat: 'cold',      price: 'Rp 35.000', tag: 'Best Seller', desc: 'Diseduh dingin 16 jam, smooth dan natural sweet.' },
-  { name: 'Iced Latte',           cat: 'cold',      price: 'Rp 30.000', tag: '',            desc: 'Espresso dingin dengan susu full cream yang creamy.' },
-  { name: 'Caramel Macchiato',    cat: 'cold',      price: 'Rp 37.000', tag: '',            desc: 'Lapis vanila, susu dingin, espresso, dan siraman karamel.' },
-  { name: 'Nitro Cold Brew',      cat: 'cold',      price: 'Rp 42.000', tag: 'New',         desc: 'Cold brew diinfus nitrogen, tekstur creamy seperti bir gelap.' },
+  { name: 'Cold Brew Flores',     cat: 'cold',      price: 'Rp 35.000', tag: 'Best Seller', desc: 'Diseduh dingin 16 jam, smooth dan natural sweet.',              img: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=120&h=120&fit=crop' },
+  { name: 'Iced Latte',           cat: 'cold',      price: 'Rp 30.000', tag: '',            desc: 'Espresso dingin dengan susu full cream yang creamy.',           img: 'https://images.unsplash.com/photo-1534778101976-62847782c213?w=120&h=120&fit=crop' },
+  { name: 'Caramel Macchiato',    cat: 'cold',      price: 'Rp 37.000', tag: '',            desc: 'Lapis vanila, susu dingin, espresso, dan siraman karamel.',     img: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=120&h=120&fit=crop' },
+  { name: 'Nitro Cold Brew',      cat: 'cold',      price: 'Rp 42.000', tag: 'New',         desc: 'Cold brew diinfus nitrogen, tekstur creamy seperti bir gelap.', img: 'https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=120&h=120&fit=crop' },
 
   // Signature
-  { name: 'BrewCo Special Blend', cat: 'signature', price: 'Rp 45.000', tag: 'Signature',   desc: 'Blend eksklusif tiga origin, kompleks dan balance sempurna.' },
-  { name: 'Kopi Gula Aren',       cat: 'signature', price: 'Rp 38.000', tag: 'Signature',   desc: 'Espresso iced dengan gula aren asli Pangandaran.' },
-  { name: 'Dirty Matcha',         cat: 'signature', price: 'Rp 40.000', tag: 'New',         desc: 'Shot espresso dituang di atas matcha latte dingin.' },
-  { name: 'Brown Sugar Oat Latte',cat: 'signature', price: 'Rp 42.000', tag: 'New',         desc: 'Espresso, oat milk, brown sugar syrup, dan cinnamon.' },
+  { name: 'BrewCo Special Blend', cat: 'signature', price: 'Rp 45.000', tag: 'Signature',   desc: 'Blend eksklusif tiga origin, kompleks dan balance sempurna.',   img: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=120&h=120&fit=crop' },
+  { name: 'Kopi Gula Aren',       cat: 'signature', price: 'Rp 38.000', tag: 'Signature',   desc: 'Espresso iced dengan gula aren asli Pangandaran.',              img: 'https://images.unsplash.com/photo-1542992015-4a0b729b1385?w=120&h=120&fit=crop' },
+  { name: 'Dirty Matcha',         cat: 'signature', price: 'Rp 40.000', tag: 'New',         desc: 'Shot espresso dituang di atas matcha latte dingin.',            img: 'https://images.unsplash.com/photo-1515823064-d6e0c04616a7?w=120&h=120&fit=crop' },
+  { name: 'Brown Sugar Oat Latte',cat: 'signature', price: 'Rp 42.000', tag: 'New',         desc: 'Espresso, oat milk, brown sugar syrup, dan cinnamon.',          img: 'https://images.unsplash.com/photo-1485808191679-5f86510bd9d4?w=120&h=120&fit=crop' },
 
   // Non-Kopi
-  { name: 'Matcha Latte',         cat: 'nonkopi',   price: 'Rp 30.000', tag: 'Best Seller', desc: 'Matcha ceremonial grade dengan susu oat yang creamy.' },
-  { name: 'Coklat Panas',         cat: 'nonkopi',   price: 'Rp 27.000', tag: '',            desc: 'Dark chocolate premium, cocok untuk hari hujan.' },
-  { name: 'Teh Lemon Soda',       cat: 'nonkopi',   price: 'Rp 22.000', tag: '',            desc: 'Segar, asam, dan berbuih. Pilihan non-kafein terbaik.' },
-  { name: 'Strawberry Yakult',    cat: 'nonkopi',   price: 'Rp 25.000', tag: 'New',         desc: 'Strawberry, yakult, dan soda water. Favorit pelanggan muda.' },
+  { name: 'Matcha Latte',         cat: 'nonkopi',   price: 'Rp 30.000', tag: 'Best Seller', desc: 'Matcha ceremonial grade dengan susu oat yang creamy.',          img: 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=120&h=120&fit=crop' },
+  { name: 'Coklat Panas',         cat: 'nonkopi',   price: 'Rp 27.000', tag: '',            desc: 'Dark chocolate premium, cocok untuk hari hujan.',               img: 'https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=120&h=120&fit=crop' },
+  { name: 'Teh Lemon Soda',       cat: 'nonkopi',   price: 'Rp 22.000', tag: '',            desc: 'Segar, asam, dan berbuih. Pilihan non-kafein terbaik.',          img: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=120&h=120&fit=crop' },
+  { name: 'Strawberry Yakult',    cat: 'nonkopi',   price: 'Rp 25.000', tag: 'New',         desc: 'Strawberry, yakult, dan soda water. Favorit pelanggan muda.',   img: 'https://images.unsplash.com/photo-1497534446932-c925b458314e?w=120&h=120&fit=crop' },
 ];
 
 /* ===== RENDER MENU — gaya list elegan ===== */
@@ -53,6 +53,7 @@ function renderMenu(filter) {
     }
 
     row.innerHTML =
+      '<img src="' + item.img + '" alt="' + item.name + '" class="w-16 h-16 object-cover shrink-0 grayscale hover:grayscale-0 transition-all duration-500" />' +
       '<div class="flex-1 min-w-0">' +
         '<div class="flex items-center gap-3 mb-1">' +
           '<h3 class="font-display text-lg font-semibold text-ink dark:text-stone">' + item.name + '</h3>' +
