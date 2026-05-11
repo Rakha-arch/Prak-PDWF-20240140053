@@ -5,267 +5,299 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BrewCo — Kedai Kopi Premium</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <script>
     tailwind.config = {
       darkMode: 'class',
       theme: {
         extend: {
           fontFamily: {
-            display: ['Playfair Display', 'serif'],
-            body: ['DM Sans', 'sans-serif'],
+            display: ['Cormorant Garamond', 'serif'],
+            body: ['Inter', 'sans-serif'],
           },
           colors: {
-            cream: '#F5F0E8',
-            espresso: '#2C1810',
-            roast: '#6B3A2A',
-            latte: '#C9A96E',
+            stone:  '#F7F4EF',
+            ink:    '#1A1714',
+            bark:   '#4A3728',
+            amber:  '#B8884A',
+            mist:   '#E8E2D9',
           }
         }
       }
     }
   </script>
   <style>
-    body { font-family: 'DM Sans', sans-serif; }
-    .hero-bg {
-      background-image: radial-gradient(ellipse at 70% 50%, #6B3A2A22 0%, transparent 60%),
-                        radial-gradient(ellipse at 20% 80%, #C9A96E15 0%, transparent 50%);
+    * { font-family: 'Inter', sans-serif; }
+    h1, h2, h3, .font-display { font-family: 'Cormorant Garamond', serif; }
+
+    .menu-card { transition: background 0.3s ease; }
+    .menu-card:hover { background: rgba(184,136,74,0.06); }
+
+    .filter-active   { color: #4A3728; border-bottom: 2px solid #B8884A; }
+    .filter-inactive { color: rgba(74,55,40,0.45); border-bottom: 2px solid transparent; }
+    .filter-inactive:hover { color: #4A3728; }
+    .dark .filter-active   { color: #F7F4EF; border-bottom-color: #B8884A; }
+    .dark .filter-inactive { color: rgba(247,244,239,0.4); }
+    .dark .filter-inactive:hover { color: #F7F4EF; }
+
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(20px); }
+      to   { opacity:1; transform:translateY(0); }
     }
-    .card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-    .card-hover:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(44,24,16,0.15); }
-    .counter-num { font-variant-numeric: tabular-nums; }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .fade-up { animation: fadeInUp 0.6s ease forwards; }
-    .fade-up-2 { animation: fadeInUp 0.6s 0.15s ease both; }
-    .fade-up-3 { animation: fadeInUp 0.6s 0.3s ease both; }
-    #modal-backdrop { backdrop-filter: blur(4px); }
+    .anim-1 { animation: fadeUp .7s ease both; }
+    .anim-2 { animation: fadeUp .7s .12s ease both; }
+    .anim-3 { animation: fadeUp .7s .24s ease both; }
+    .anim-4 { animation: fadeUp .7s .36s ease both; }
+
+    #modal-backdrop { backdrop-filter: blur(6px); }
   </style>
 </head>
-<body class="bg-cream dark:bg-espresso text-espresso dark:text-cream transition-colors duration-300">
+<body class="bg-stone dark:bg-ink text-ink dark:text-stone transition-colors duration-500">
 
   <!-- NAVBAR -->
-  <nav class="fixed top-0 w-full z-50 bg-cream/90 dark:bg-espresso/90 backdrop-blur-md border-b border-latte/20">
-    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      <span class="font-display text-2xl font-black tracking-tight text-roast dark:text-latte">BrewCo</span>
-      <div class="hidden md:flex items-center gap-8 text-sm font-medium">
-        <a href="#menu" class="hover:text-roast dark:hover:text-latte transition-colors">Menu</a>
-        <a href="#tentang" class="hover:text-roast dark:hover:text-latte transition-colors">Tentang</a>
-        <a href="#kontak" class="hover:text-roast dark:hover:text-latte transition-colors">Kontak</a>
+  <nav class="fixed top-0 w-full z-50 bg-stone/95 dark:bg-ink/95 backdrop-blur-md border-b border-mist dark:border-bark/20 transition-colors duration-500">
+    <div class="max-w-6xl mx-auto px-8 h-16 flex items-center justify-between">
+      <a href="#" class="font-display text-2xl font-bold tracking-wide text-bark dark:text-amber">BrewCo</a>
+      <div class="hidden md:flex items-center gap-10 text-sm font-medium">
+        <a href="#menu"    class="text-ink/50 dark:text-stone/50 hover:text-bark dark:hover:text-amber transition-colors">Menu</a>
+        <a href="#tentang" class="text-ink/50 dark:text-stone/50 hover:text-bark dark:hover:text-amber transition-colors">Tentang</a>
+        <a href="#kontak"  class="text-ink/50 dark:text-stone/50 hover:text-bark dark:hover:text-amber transition-colors">Kontak</a>
       </div>
-      <div class="flex items-center gap-3">
-        <!-- Dark Mode Toggle -->
+      <div class="flex items-center gap-4">
         <button id="darkToggle" title="Toggle dark mode"
-          class="w-10 h-10 rounded-full border border-latte/40 flex items-center justify-center hover:bg-latte/20 transition-colors text-lg">
+          class="text-ink/40 dark:text-stone/40 hover:text-bark dark:hover:text-amber transition-colors text-base w-8 h-8 flex items-center justify-center">
           🌙
         </button>
         <button onclick="openModal()"
-          class="bg-roast text-cream px-5 py-2 rounded-full text-sm font-semibold hover:bg-espresso transition-colors dark:bg-latte dark:text-espresso dark:hover:bg-amber-400">
-          Pesan Sekarang
+          class="bg-bark text-stone text-xs font-semibold px-5 py-2.5 tracking-widest uppercase hover:bg-ink dark:bg-amber dark:text-ink dark:hover:bg-amber/80 transition-colors">
+          Pesan
         </button>
       </div>
     </div>
   </nav>
 
   <!-- HERO -->
-  <section class="hero-bg min-h-screen flex items-center pt-20">
-    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+  <section class="min-h-screen flex items-center pt-16">
+    <div class="max-w-6xl mx-auto px-8 w-full grid md:grid-cols-2 gap-16 items-center py-28">
       <div>
-        <p class="fade-up text-roast dark:text-latte font-semibold text-sm tracking-widest uppercase mb-4">Specialty Coffee</p>
-        <h1 class="fade-up-2 font-display text-6xl md:text-7xl font-black leading-tight mb-6">
-          Kopi yang<br/>
-          <span class="text-roast dark:text-latte">Bercerita</span>
+        <p class="anim-1 text-amber text-xs font-semibold tracking-[0.3em] uppercase mb-8">Specialty Coffee · Since 2019</p>
+        <h1 class="anim-2 font-display text-7xl md:text-8xl font-bold leading-[1.05] mb-8">
+          Kopi yang<br/><em class="text-bark dark:text-amber not-italic">Bercerita</em>
         </h1>
-        <p class="fade-up-3 text-espresso/70 dark:text-cream/70 text-lg leading-relaxed mb-8 max-w-md">
-          Biji kopi pilihan dari dataran tinggi Gayo, diseduh dengan presisi oleh barista berpengalaman. Setiap cangkir adalah pengalaman yang tak terlupakan.
+        <p class="anim-3 text-ink/50 dark:text-stone/50 text-base leading-relaxed mb-10 max-w-sm">
+          Biji kopi pilihan dari dataran tinggi Gayo, diseduh dengan presisi oleh barista berpengalaman kami.
         </p>
-        <div class="fade-up-3 flex gap-4 flex-wrap">
+        <div class="anim-4 flex gap-6 items-center">
           <a href="#menu"
-            class="bg-roast text-cream px-8 py-3 rounded-full font-semibold hover:bg-espresso transition-colors dark:bg-latte dark:text-espresso dark:hover:bg-amber-400">
+            class="bg-bark text-stone px-8 py-3 text-xs font-semibold tracking-widest uppercase hover:bg-ink dark:bg-amber dark:text-ink dark:hover:bg-amber/80 transition-colors">
             Lihat Menu
           </a>
-          <a href="#tentang"
-            class="border border-roast/40 dark:border-latte/40 px-8 py-3 rounded-full font-semibold hover:bg-roast/10 transition-colors">
-            Tentang Kami
+          <a href="#tentang" class="text-sm text-ink/50 dark:text-stone/50 hover:text-bark dark:hover:text-amber transition-colors underline underline-offset-4">
+            Tentang Kami →
           </a>
         </div>
       </div>
-      <!-- Ilustrasi sederhana -->
-      <div class="flex justify-center">
-        <div class="relative w-72 h-72">
-          <div class="absolute inset-0 rounded-full bg-latte/20 dark:bg-latte/10 animate-pulse"></div>
-          <div class="absolute inset-8 rounded-full bg-roast/10 dark:bg-latte/5"></div>
-          <div class="absolute inset-0 flex items-center justify-center text-9xl">☕</div>
+
+      <div class="hidden md:flex justify-end">
+        <div class="relative">
+          <div class="w-80 h-80 rounded-full bg-mist dark:bg-bark/20 flex items-center justify-center">
+            <div class="text-[6rem]">☕</div>
+          </div>
+          <div class="absolute -bottom-4 -left-6 bg-stone dark:bg-ink border border-mist dark:border-bark/30 px-5 py-3 shadow-lg">
+            <p class="text-[10px] text-ink/30 dark:text-stone/30 tracking-widest uppercase">Rating</p>
+            <p class="font-display text-2xl font-bold text-bark dark:text-amber">4.9 ★</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- STATISTIK COUNTER -->
-  <section id="stats" class="bg-roast text-cream py-16">
-    <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-      <div>
-        <p class="counter-num font-display text-5xl font-black text-latte" data-target="1200">0</p>
-        <p class="mt-2 text-cream/70 text-sm font-medium">Pelanggan Setia</p>
+  <!-- STATS -->
+  <section id="stats" class="border-t border-b border-mist dark:border-bark/20">
+    <div class="max-w-6xl mx-auto px-8 grid grid-cols-2 md:grid-cols-4">
+      <div class="text-center py-12 border-r border-mist dark:border-bark/20">
+        <p class="font-display text-5xl font-bold text-bark dark:text-amber counter-num" data-target="1200">0</p>
+        <p class="text-[10px] text-ink/35 dark:text-stone/35 tracking-widest uppercase mt-3">Pelanggan Setia</p>
       </div>
-      <div>
-        <p class="counter-num font-display text-5xl font-black text-latte" data-target="24">0</p>
-        <p class="mt-2 text-cream/70 text-sm font-medium">Varian Kopi</p>
+      <div class="text-center py-12 md:border-r border-mist dark:border-bark/20">
+        <p class="font-display text-5xl font-bold text-bark dark:text-amber counter-num" data-target="30">0</p>
+        <p class="text-[10px] text-ink/35 dark:text-stone/35 tracking-widest uppercase mt-3">Varian Kopi</p>
       </div>
-      <div>
-        <p class="counter-num font-display text-5xl font-black text-latte" data-target="5">0</p>
-        <p class="mt-2 text-cream/70 text-sm font-medium">Tahun Berdiri</p>
+      <div class="text-center py-12 border-r border-mist dark:border-bark/20">
+        <p class="font-display text-5xl font-bold text-bark dark:text-amber counter-num" data-target="5">0</p>
+        <p class="text-[10px] text-ink/35 dark:text-stone/35 tracking-widest uppercase mt-3">Tahun Berdiri</p>
       </div>
-      <div>
-        <p class="counter-num font-display text-5xl font-black text-latte" data-target="98">0</p>
-        <p class="mt-2 text-cream/70 text-sm font-medium">% Kepuasan</p>
+      <div class="text-center py-12">
+        <p class="font-display text-5xl font-bold text-bark dark:text-amber counter-num" data-target="98">0</p>
+        <p class="text-[10px] text-ink/35 dark:text-stone/35 tracking-widest uppercase mt-3">% Kepuasan</p>
       </div>
     </div>
   </section>
 
-  <!-- MENU dengan FILTER DOM -->
+  <!-- MENU -->
   <section id="menu" class="py-24">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center mb-12">
-        <p class="text-roast dark:text-latte font-semibold text-sm tracking-widest uppercase mb-3">Menu Kami</p>
-        <h2 class="font-display text-5xl font-black">Pilihan Terbaik</h2>
+    <div class="max-w-6xl mx-auto px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
+        <div>
+          <p class="text-amber text-xs font-semibold tracking-[0.3em] uppercase mb-4">Menu Kami</p>
+          <h2 class="font-display text-5xl font-bold">Pilihan Terbaik</h2>
+        </div>
+        <div class="flex gap-8 text-sm font-medium" id="filterButtons">
+          <button onclick="filterMenu('semua')"    data-filter="semua"    class="filter-btn pb-2 transition-colors filter-active">Semua</button>
+          <button onclick="filterMenu('hot')"      data-filter="hot"      class="filter-btn pb-2 transition-colors filter-inactive">Hot</button>
+          <button onclick="filterMenu('cold')"     data-filter="cold"     class="filter-btn pb-2 transition-colors filter-inactive">Cold Brew</button>
+          <button onclick="filterMenu('signature')"data-filter="signature"class="filter-btn pb-2 transition-colors filter-inactive">Signature</button>
+          <button onclick="filterMenu('nonkopi')"  data-filter="nonkopi"  class="filter-btn pb-2 transition-colors filter-inactive">Non-Kopi</button>
+        </div>
       </div>
-
-      <!-- Filter Buttons -->
-      <div class="flex gap-3 justify-center flex-wrap mb-10" id="filterButtons">
-        <button onclick="filterMenu('semua')" data-filter="semua"
-          class="filter-btn px-5 py-2 rounded-full text-sm font-semibold border border-roast/30 bg-roast text-cream transition-colors">
-          Semua
-        </button>
-        <button onclick="filterMenu('hot')" data-filter="hot"
-          class="filter-btn px-5 py-2 rounded-full text-sm font-semibold border border-roast/30 hover:bg-roast/10 transition-colors">
-          Hot Coffee
-        </button>
-        <button onclick="filterMenu('cold')" data-filter="cold"
-          class="filter-btn px-5 py-2 rounded-full text-sm font-semibold border border-roast/30 hover:bg-roast/10 transition-colors">
-          Cold Brew
-        </button>
-        <button onclick="filterMenu('nonkopi')" data-filter="nonkopi"
-          class="filter-btn px-5 py-2 rounded-full text-sm font-semibold border border-roast/30 hover:bg-roast/10 transition-colors">
-          Non-Kopi
-        </button>
-      </div>
-
-      <!-- Menu Cards -->
-      <div id="menuGrid" class="grid md:grid-cols-3 gap-6">
-        <!-- Kartu menu akan di-render oleh JS -->
-      </div>
+      <div id="menuGrid" class="divide-y divide-mist dark:divide-bark/20"></div>
     </div>
   </section>
 
   <!-- TENTANG -->
-  <section id="tentang" class="py-24 bg-espresso/5 dark:bg-cream/5">
-    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+  <section id="tentang" class="py-24 bg-mist dark:bg-bark/10">
+    <div class="max-w-6xl mx-auto px-8 grid md:grid-cols-2 gap-20 items-center">
       <div>
-        <p class="text-roast dark:text-latte font-semibold text-sm tracking-widest uppercase mb-4">Cerita Kami</p>
-        <h2 class="font-display text-5xl font-black mb-6">Passion Dalam<br/>Setiap Cangkir</h2>
-        <p class="text-espresso/70 dark:text-cream/70 leading-relaxed mb-4">
+        <p class="text-amber text-xs font-semibold tracking-[0.3em] uppercase mb-6">Cerita Kami</p>
+        <h2 class="font-display text-5xl font-bold mb-8 leading-tight">
+          Passion Dalam<br/>Setiap Cangkir
+        </h2>
+        <p class="text-ink/55 dark:text-stone/55 leading-relaxed mb-5 text-sm">
           BrewCo lahir dari kecintaan mendalam terhadap budaya kopi Indonesia. Kami bekerja langsung dengan petani lokal untuk memastikan kualitas terbaik dari hulu ke hilir.
         </p>
-        <p class="text-espresso/70 dark:text-cream/70 leading-relaxed">
+        <p class="text-ink/55 dark:text-stone/55 leading-relaxed mb-12 text-sm">
           Setiap biji dipilih secara manual, disangrai dengan sempurna, dan diseduh dengan teknik yang terus kami sempurnakan sejak 2019.
         </p>
+        <div class="grid grid-cols-2 gap-y-6 gap-x-8 text-sm">
+          <div>
+            <p class="text-[10px] tracking-widest uppercase text-ink/30 dark:text-stone/30 mb-1">Asal Biji</p>
+            <p class="font-medium">Gayo, Flores, Toraja</p>
+          </div>
+          <div>
+            <p class="text-[10px] tracking-widest uppercase text-ink/30 dark:text-stone/30 mb-1">Metode</p>
+            <p class="font-medium">Pour Over, Espresso, Cold Brew</p>
+          </div>
+          <div>
+            <p class="text-[10px] tracking-widest uppercase text-ink/30 dark:text-stone/30 mb-1">Sertifikasi</p>
+            <p class="font-medium">SCA Certified Barista</p>
+          </div>
+          <div>
+            <p class="text-[10px] tracking-widest uppercase text-ink/30 dark:text-stone/30 mb-1">Roastery</p>
+            <p class="font-medium">In-house, Yogyakarta</p>
+          </div>
+        </div>
       </div>
-      <div class="grid grid-cols-2 gap-4">
-        <div class="bg-cream dark:bg-espresso p-6 rounded-2xl border border-latte/20 card-hover">
-          <div class="text-4xl mb-3">🌱</div>
-          <h3 class="font-display font-bold text-lg mb-2">Single Origin</h3>
-          <p class="text-sm text-espresso/60 dark:text-cream/60">Langsung dari petani pilihan</p>
+      <div class="grid grid-cols-2 gap-3">
+        <div class="bg-stone dark:bg-ink p-6 border border-mist dark:border-bark/20 menu-card">
+          <p class="text-xl mb-4">🌱</p>
+          <h3 class="font-display text-lg font-bold mb-1">Single Origin</h3>
+          <p class="text-xs text-ink/45 dark:text-stone/45 leading-relaxed">Langsung dari petani pilihan</p>
         </div>
-        <div class="bg-cream dark:bg-espresso p-6 rounded-2xl border border-latte/20 card-hover">
-          <div class="text-4xl mb-3">🏆</div>
-          <h3 class="font-display font-bold text-lg mb-2">Award Winning</h3>
-          <p class="text-sm text-espresso/60 dark:text-cream/60">Juara barista nasional 2023</p>
+        <div class="bg-stone dark:bg-ink p-6 border border-mist dark:border-bark/20 menu-card">
+          <p class="text-xl mb-4">🏆</p>
+          <h3 class="font-display text-lg font-bold mb-1">Award Winning</h3>
+          <p class="text-xs text-ink/45 dark:text-stone/45 leading-relaxed">Juara barista nasional 2023</p>
         </div>
-        <div class="bg-cream dark:bg-espresso p-6 rounded-2xl border border-latte/20 card-hover">
-          <div class="text-4xl mb-3">♻️</div>
-          <h3 class="font-display font-bold text-lg mb-2">Eco Friendly</h3>
-          <p class="text-sm text-espresso/60 dark:text-cream/60">Kemasan ramah lingkungan</p>
+        <div class="bg-stone dark:bg-ink p-6 border border-mist dark:border-bark/20 menu-card">
+          <p class="text-xl mb-4">♻️</p>
+          <h3 class="font-display text-lg font-bold mb-1">Eco Friendly</h3>
+          <p class="text-xs text-ink/45 dark:text-stone/45 leading-relaxed">Kemasan ramah lingkungan</p>
         </div>
-        <div class="bg-cream dark:bg-espresso p-6 rounded-2xl border border-latte/20 card-hover">
-          <div class="text-4xl mb-3">🚀</div>
-          <h3 class="font-display font-bold text-lg mb-2">Fast Delivery</h3>
-          <p class="text-sm text-espresso/60 dark:text-cream/60">Antar ke seluruh Indonesia</p>
+        <div class="bg-stone dark:bg-ink p-6 border border-mist dark:border-bark/20 menu-card">
+          <p class="text-xl mb-4">🚀</p>
+          <h3 class="font-display text-lg font-bold mb-1">Fast Delivery</h3>
+          <p class="text-xs text-ink/45 dark:text-stone/45 leading-relaxed">Antar ke seluruh Indonesia</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- KONTAK / CTA -->
-  <section id="kontak" class="py-24 text-center">
-    <div class="max-w-2xl mx-auto px-6">
-      <h2 class="font-display text-5xl font-black mb-6">Mulai Hari ini<br/>dengan BrewCo</h2>
-      <p class="text-espresso/70 dark:text-cream/70 mb-8 text-lg">
-        Daftarkan email kamu dan dapatkan diskon 20% untuk pemesanan pertama.
+  <!-- KONTAK -->
+  <section id="kontak" class="py-24">
+    <div class="max-w-lg mx-auto px-8 text-center">
+      <p class="text-amber text-xs font-semibold tracking-[0.3em] uppercase mb-6">Newsletter</p>
+      <h2 class="font-display text-5xl font-bold mb-4">Mulai Hari Ini<br/>dengan BrewCo</h2>
+      <p class="text-ink/45 dark:text-stone/45 mb-10 text-sm leading-relaxed">
+        Daftarkan email dan dapatkan diskon 20% untuk pemesanan pertama.
       </p>
-      <div class="flex gap-3 max-w-md mx-auto">
+      <div class="flex border border-mist dark:border-bark/40 overflow-hidden">
         <input type="email" id="emailInput" placeholder="emailkamu@contoh.com"
-          class="flex-1 px-5 py-3 rounded-full border border-latte/40 bg-cream dark:bg-espresso focus:outline-none focus:ring-2 focus:ring-roast dark:focus:ring-latte text-sm" />
+          class="flex-1 px-5 py-3 bg-transparent text-sm focus:outline-none text-ink dark:text-stone placeholder:text-ink/25 dark:placeholder:text-stone/25" />
         <button onclick="submitEmail()"
-          class="bg-roast text-cream px-6 py-3 rounded-full font-semibold hover:bg-espresso transition-colors dark:bg-latte dark:text-espresso dark:hover:bg-amber-400 whitespace-nowrap text-sm">
+          class="bg-bark text-stone px-6 py-3 text-xs font-semibold tracking-widest uppercase hover:bg-ink dark:bg-amber dark:text-ink dark:hover:bg-amber/80 transition-colors whitespace-nowrap">
           Daftar
         </button>
       </div>
-      <p id="emailMsg" class="mt-4 text-sm text-roast dark:text-latte font-medium hidden"></p>
+      <p id="emailMsg" class="mt-4 text-xs text-bark dark:text-amber font-medium hidden"></p>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="border-t border-latte/20 py-8">
-    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-espresso/50 dark:text-cream/50">
-      <span class="font-display font-black text-xl text-roast dark:text-latte">BrewCo</span>
-      <p>© 2025 BrewCo. Dibuat dengan ☕ dan semangat.</p>
-      <div class="flex gap-6">
-        <a href="#" class="hover:text-roast dark:hover:text-latte transition-colors">Instagram</a>
-        <a href="#" class="hover:text-roast dark:hover:text-latte transition-colors">TikTok</a>
-        <a href="#" class="hover:text-roast dark:hover:text-latte transition-colors">WhatsApp</a>
+  <footer class="border-t border-mist dark:border-bark/20 py-10">
+    <div class="max-w-6xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <span class="font-display text-xl font-bold text-bark dark:text-amber">BrewCo</span>
+      <p class="text-[10px] text-ink/25 dark:text-stone/25 tracking-widest uppercase">© 2025 BrewCo · Dibuat dengan ☕ dan semangat</p>
+      <div class="flex gap-6 text-xs text-ink/35 dark:text-stone/35 tracking-wide">
+        <a href="#" class="hover:text-bark dark:hover:text-amber transition-colors">Instagram</a>
+        <a href="#" class="hover:text-bark dark:hover:text-amber transition-colors">TikTok</a>
+        <a href="#" class="hover:text-bark dark:hover:text-amber transition-colors">WhatsApp</a>
       </div>
     </div>
   </footer>
 
-  <!-- MODAL PEMESANAN -->
-  <div id="modal-backdrop"
-    class="fixed inset-0 bg-espresso/60 z-50 hidden flex items-center justify-center p-4">
+  <!-- MODAL -->
+  <div id="modal-backdrop" class="fixed inset-0 bg-ink/50 z-50 hidden items-center justify-center p-4">
     <div id="modal-box"
-      class="bg-cream dark:bg-espresso w-full max-w-md rounded-3xl p-8 shadow-2xl border border-latte/20 relative">
+      class="bg-stone dark:bg-ink w-full max-w-md p-8 shadow-2xl border border-mist dark:border-bark/30 relative">
       <button onclick="closeModal()"
-        class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full hover:bg-latte/20 transition-colors text-xl">
-        ✕
+        class="absolute top-5 right-5 text-xs text-ink/30 dark:text-stone/30 hover:text-ink dark:hover:text-stone transition-colors tracking-widest uppercase">
+        ✕ Tutup
       </button>
-      <h3 class="font-display text-3xl font-black mb-2">Pesan Sekarang</h3>
-      <p class="text-espresso/60 dark:text-cream/60 text-sm mb-6">Isi form berikut, kami akan hubungi kamu segera.</p>
-      <div class="space-y-4">
+      <p class="text-amber text-xs font-semibold tracking-[0.2em] uppercase mb-4">Pemesanan</p>
+      <h3 class="font-display text-3xl font-bold mb-6">Pesan Sekarang</h3>
+      <div class="space-y-3">
         <input type="text" id="orderName" placeholder="Nama lengkap"
-          class="w-full px-5 py-3 rounded-xl border border-latte/30 bg-cream dark:bg-espresso/50 focus:outline-none focus:ring-2 focus:ring-roast dark:focus:ring-latte text-sm" />
+          class="w-full px-4 py-3 border border-mist dark:border-bark/30 bg-transparent text-sm focus:outline-none focus:border-amber transition-colors text-ink dark:text-stone placeholder:text-ink/25 dark:placeholder:text-stone/25" />
         <input type="tel" id="orderPhone" placeholder="Nomor WhatsApp"
-          class="w-full px-5 py-3 rounded-xl border border-latte/30 bg-cream dark:bg-espresso/50 focus:outline-none focus:ring-2 focus:ring-roast dark:focus:ring-latte text-sm" />
+          class="w-full px-4 py-3 border border-mist dark:border-bark/30 bg-transparent text-sm focus:outline-none focus:border-amber transition-colors text-ink dark:text-stone placeholder:text-ink/25 dark:placeholder:text-stone/25" />
         <select id="orderMenu"
-          class="w-full px-5 py-3 rounded-xl border border-latte/30 bg-cream dark:bg-espresso/50 focus:outline-none focus:ring-2 focus:ring-roast dark:focus:ring-latte text-sm">
-          <option value="">-- Pilih Menu --</option>
-          <option>Espresso Gayo</option>
-          <option>Cold Brew Flores</option>
-          <option>Kopi Susu Spesial</option>
-          <option>Matcha Latte</option>
-          <option>Americano</option>
-          <option>Caramel Macchiato</option>
+          class="w-full px-4 py-3 border border-mist dark:border-bark/30 bg-stone dark:bg-ink text-sm focus:outline-none focus:border-amber transition-colors text-ink dark:text-stone">
+          <option value="">— Pilih Menu —</option>
+          <optgroup label="Hot Coffee">
+            <option>Espresso Gayo</option>
+            <option>Americano</option>
+            <option>Flat White</option>
+            <option>Kopi Susu Spesial</option>
+            <option>Pour Over Toraja</option>
+          </optgroup>
+          <optgroup label="Cold Brew">
+            <option>Cold Brew Flores</option>
+            <option>Iced Latte</option>
+            <option>Caramel Macchiato</option>
+            <option>Nitro Cold Brew</option>
+          </optgroup>
+          <optgroup label="Signature">
+            <option>BrewCo Special Blend</option>
+            <option>Kopi Gula Aren</option>
+            <option>Dirty Matcha</option>
+            <option>Brown Sugar Oat Latte</option>
+          </optgroup>
+          <optgroup label="Non-Kopi">
+            <option>Matcha Latte</option>
+            <option>Coklat Panas</option>
+            <option>Teh Lemon Soda</option>
+            <option>Strawberry Yakult</option>
+          </optgroup>
         </select>
         <button onclick="submitOrder()"
-          class="w-full bg-roast text-cream py-3 rounded-xl font-semibold hover:bg-espresso transition-colors dark:bg-latte dark:text-espresso dark:hover:bg-amber-400">
+          class="w-full bg-bark text-stone py-3 text-xs font-semibold tracking-widest uppercase hover:bg-ink dark:bg-amber dark:text-ink dark:hover:bg-amber/80 transition-colors">
           Kirim Pesanan
         </button>
-        <p id="orderMsg" class="text-center text-sm text-roast dark:text-latte font-medium hidden"></p>
+        <p id="orderMsg" class="text-center text-xs text-bark dark:text-amber font-medium hidden pt-1"></p>
       </div>
     </div>
   </div>
 
-  <!-- Semua logika DOM ada di script.js -->
   <script src="script.js"></script>
 </body>
 </html>
